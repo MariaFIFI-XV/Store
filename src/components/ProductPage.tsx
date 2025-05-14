@@ -219,7 +219,7 @@ export function ProductPage({ productId }: ProductPageProps) {
 
               <div className="mb-8">
                 <span className="text-4xl font-bold text-gray-900">
-                  R$ {product.price}
+                  R$ {product.price.toFixed(2)}
                 </span>
               </div>
 
@@ -232,7 +232,7 @@ export function ProductPage({ productId }: ProductPageProps) {
                   Adicionar ao Carrinho
                 </button>
 
-                <div className="border-t border-gray-200 pt-6">
+                {/* <div className="border-t border-gray-200 pt-6">
                   <h3 className="text-lg font-medium text-gray-900 mb-4">
                     Detalhes do Produto
                   </h3>
@@ -242,7 +242,7 @@ export function ProductPage({ productId }: ProductPageProps) {
                     <li>• Garantia de 30 dias</li>
                     <li>• Frete grátis para todo o Brasil</li>
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

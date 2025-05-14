@@ -3,12 +3,45 @@ import { useAuth } from '../context/AuthContext';
 import { LogOut, Package, ArrowLeft, User, MapPin, Phone, Mail, Calendar, CreditCard, Clock, ShoppingBag } from 'lucide-react';
 import { Link } from './Link';
 
+
 interface Order {
   id: string;
   date: string;
   status: string;
   total: number;
   items: number;
+}
+
+
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+
+  if (digits.length === 11) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+  } else if (digits.length === 10) {
+    return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+  }
+
+  return phone; 
+}
+
+function formatDate(date: string): string {
+  const [year, month, day] = date.split('-');
+  if (year && month && day) {
+    return `${day}/${month}/${year}`;
+  }
+
+  return date;
+}
+
+function formatCPF(cpf: string): string {
+  const digits = cpf.replace(/\D/g, '');
+
+  if (digits.length === 11) {
+    return `${digits.slice(0, 3)}.${digits.slice(3, 6)}.${digits.slice(6, 9)}-${digits.slice(9)}`;
+  }
+
+  return cpf; 
 }
 
 const mockOrders: Order[] = [
@@ -86,8 +119,8 @@ export function AccountPage() {
                 <User className="w-6 h-6 text-gray-600" />
               </div>
               <div>
-                <h2 className="font-semibold text-gray-900">{user.email}</h2>
-                <p className="text-sm text-gray-500">Cliente desde Mar 2024</p>
+                <h1 className="text-xl font-bold text-gray-900">Olá {user.name}!</h1>
+                <p className="text-sm text-gray-500">{user.email}</p>
               </div>
             </div>
 
@@ -152,7 +185,7 @@ export function AccountPage() {
                       <label className="block text-sm font-medium text-gray-700">Telefone</label>
                       <div className="mt-1 flex items-center gap-2 text-gray-900">
                         <Phone size={18} className="text-gray-400" />
-                        <span>{user.phone}</span>
+                        <span>{formatPhone(user.phone)}</span>
                       </div>
                     </div>
 
@@ -160,7 +193,7 @@ export function AccountPage() {
                       <label className="block text-sm font-medium text-gray-700">Data de Nascimento</label>
                       <div className="mt-1 flex items-center gap-2 text-gray-900">
                         <Calendar size={18} className="text-gray-400" />
-                        <span>{user.birthDate}</span>
+                        <span>{formatDate(user.birthDate)}</span>
                       </div>
                     </div>
                   </div>
@@ -170,7 +203,7 @@ export function AccountPage() {
                       <label className="block text-sm font-medium text-gray-700">CPF:</label>
                       <div className="mt-1 flex items-center gap-2 text-gray-900">
                         <MapPin size={18} className="text-gray-400" />
-                        <span>{user.cpf}</span>
+                        <span>{formatCPF(user.cpf)}</span>
                       </div>
                     </div>
                   </div>

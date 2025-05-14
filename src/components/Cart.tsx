@@ -56,7 +56,7 @@ export function Cart({ onCheckout }: CartProps) {
       <div className="border-t pt-4">
         <div className="flex justify-between items-center">
           <span className="text-lg font-medium">Total:</span>
-          <span className="text-xl font-bold">R$ {total}</span>
+          <span className="text-xl font-bold">R$ {total.toFixed(2)}</span>
         </div>
         <button
           onClick={onCheckout}

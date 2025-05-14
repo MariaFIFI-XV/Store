@@ -40,12 +40,6 @@ export function ProductCard({ product }: ProductCardProps) {
             className="w-full h-96 object-cover transition-transform duration-300 hover:scale-105"
           />
         </Link>
-        <Link
-          to={`/product/${product.id}`}
-          className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
-        >
-          <ExternalLink size={20} className="text-gray-600" />
-        </Link>
       </div>
       <div className="p-6">
         <Link
