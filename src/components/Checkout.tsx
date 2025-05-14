@@ -12,7 +12,7 @@ export function Checkout({ onBack }: CheckoutProps) {
   const { total, items, clearCart } = useCart();
   const { user } = useAuth();
   const [formData, setFormData] = useState({
-    name: '',
+    name: user?.name || '',
     email: user?.email || '',
     address: '',
     city: '',
