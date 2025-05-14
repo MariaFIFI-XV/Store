@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { ArrowLeft, ShoppingBag } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, X } from 'lucide-react';
+import { Link } from './Link';
 import { useAuth } from '../context/AuthContext';
 
 interface CheckoutProps {
@@ -114,7 +115,7 @@ export function Checkout({ onBack }: CheckoutProps) {
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Informações Pessoais</h3>
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                       Nome Completo
                     </label>
                     <input
@@ -124,12 +125,13 @@ export function Checkout({ onBack }: CheckoutProps) {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                      className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                      placeholder="Digite seu nome completo"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                       Email
                     </label>
                     <input
@@ -139,7 +141,8 @@ export function Checkout({ onBack }: CheckoutProps) {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                      className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                      placeholder="seu@email.com"
                     />
                   </div>
                 </div>
@@ -149,7 +152,7 @@ export function Checkout({ onBack }: CheckoutProps) {
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Endereço de Entrega</h3>
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                       Endereço
                     </label>
                     <input
@@ -159,13 +162,14 @@ export function Checkout({ onBack }: CheckoutProps) {
                       required
                       value={formData.address}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                      className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                      placeholder="Rua, número, complemento"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
                         Cidade
                       </label>
                       <input
@@ -175,12 +179,13 @@ export function Checkout({ onBack }: CheckoutProps) {
                         required
                         value={formData.city}
                         onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                        className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                        placeholder="Sua cidade"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="state" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
                         Estado
                       </label>
                       <input
@@ -190,13 +195,14 @@ export function Checkout({ onBack }: CheckoutProps) {
                         required
                         value={formData.state}
                         onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                        className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                        placeholder="Estado"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
                       CEP
                     </label>
                     <input
@@ -206,7 +212,8 @@ export function Checkout({ onBack }: CheckoutProps) {
                       required
                       value={formData.zipCode}
                       onChange={handleChange}
-                      className="mt-1  block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                      className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                      placeholder="00000-000"
                     />
                   </div>
                 </div>
@@ -216,7 +223,7 @@ export function Checkout({ onBack }: CheckoutProps) {
                 <h3 className="text-lg font-medium text-gray-900 mb-4">Informações de Pagamento</h3>
                 <div className="grid grid-cols-1 gap-4">
                   <div>
-                    <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">
                       Número do Cartão
                     </label>
                     <input
@@ -226,13 +233,14 @@ export function Checkout({ onBack }: CheckoutProps) {
                       required
                       value={formData.cardNumber}
                       onChange={handleChange}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                      className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                      placeholder="0000 0000 0000 0000"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">
                         Data de Validade
                       </label>
                       <input
@@ -243,12 +251,12 @@ export function Checkout({ onBack }: CheckoutProps) {
                         required
                         value={formData.cardExpiry}
                         onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                        className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="cardCvv" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="cardCvv" className="block text-sm font-medium text-gray-700 mb-1">
                         CVV
                       </label>
                       <input
@@ -258,7 +266,8 @@ export function Checkout({ onBack }: CheckoutProps) {
                         required
                         value={formData.cardCvv}
                         onChange={handleChange}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                        className="block w-full px-4 py-3 rounded-lg border-2 border-gray-300 shadow-sm focus:border-gray-500 focus:ring-2 focus:ring-gray-200 text-gray-900 text-base transition duration-150 ease-in-out"
+                        placeholder="000"
                       />
                     </div>
                   </div>
@@ -268,7 +277,7 @@ export function Checkout({ onBack }: CheckoutProps) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-gray-900 text-white py-3 px-4 rounded-md hover:bg-gray-800 transition-colors text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-gray-900 text-white py-4 px-6 rounded-lg hover:bg-gray-800 transition-colors text-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
               >
                 {loading ? (
                   <div className="flex items-center justify-center">
