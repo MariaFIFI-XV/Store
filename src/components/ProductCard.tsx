@@ -33,11 +33,13 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden">
       <div className="relative">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-96 object-cover"
-        />
+        <Link to={`/product/${product.id}`} className="block">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-96 object-cover transition-transform duration-300 hover:scale-105"
+          />
+        </Link>
         <Link
           to={`/product/${product.id}`}
           className="absolute top-4 right-4 p-2 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
