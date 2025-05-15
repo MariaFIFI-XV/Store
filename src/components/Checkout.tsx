@@ -17,6 +17,8 @@ interface ShippingOption {
   estimatedDays: number;
 }
 
+
+
 const shippingOptions: ShippingOption[] = [
   {
     id: 'SEDEX',
@@ -31,7 +33,6 @@ const shippingOptions: ShippingOption[] = [
     estimatedDays: 5
   }
 ];
-
 
 
 
@@ -83,10 +84,40 @@ export function Checkout({ onBack }: CheckoutProps) {
   };
 
   const handleCEPChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    value = formatCEP(value);
+    let value = formatCEP(e.target.value);
     setFormData(prev => ({ ...prev, zipCode: value }));
+
+    const numericCep = value.replace(/\D/g, '');
+    if (numericCep.length === 8) {
+      fetchAddressFromCEP(value);
+    }
   };
+
+  const fetchAddressFromCEP = async (cep: string) => {
+    const rawCep = cep.replace(/\D/g, '');
+    if (rawCep.length !== 8) return;
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${rawCep}/json/`);
+      const data = await response.json();
+
+      if (data.erro) {
+        setError('CEP não encontrado.');
+        return;
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        address: `${data.logradouro || ''}, ${data.bairro || ''}`,
+        city: data.localidade || '',
+        state: data.uf || '',
+      }));
+    } catch (err) {
+      setError('Erro ao buscar endereço. Tente novamente.');
+    }
+  };
+
+
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -275,11 +306,10 @@ export function Checkout({ onBack }: CheckoutProps) {
                   {shippingOptions.map((option) => (
                     <label
                       key={option.id}
-                      className={`flex items-center justify-between p-4 rounded-lg border-2 cursor-pointer transition-colors ${
-                        selectedShipping === option.id
+                      className={`flex items-center justify-between p-4 rounded-lg border-2 cursor-pointer transition-colors ${selectedShipping === option.id
                           ? 'border-gray-900 bg-gray-50'
                           : 'border-gray-200 hover:border-gray-300'
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center">
                         <input
